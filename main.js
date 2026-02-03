@@ -1,22 +1,17 @@
-const dogCatURL = "https://teachablemachine.withgoogle.com/models/H3k6IZmjL/";
-const faceURL = "https://teachablemachine.withgoogle.com/models/Q-gACnF9B/"; // 예시: 얼굴 인식 모델 URL
+const ageURL = "https://teachablemachine.withgoogle.com/models/s9R8t603v/"; // 나이 예측 모델 URL
 
 let currentModel, labelContainer, maxPredictions;
-let currentURL = dogCatURL;
 
 const imageUpload = document.getElementById("imageUpload");
 const imagePreview = document.getElementById("image-preview");
-const dogCatBtn = document.getElementById("dog-cat-btn");
-const faceBtn = document.getElementById("face-btn");
 const description = document.querySelector('.description');
+const ageEvaluation = document.getElementById("age-evaluation");
 
 async function init() {
-    await loadModel(currentURL);
+    await loadModel(ageURL);
 
     labelContainer = document.getElementById("label-container");
     imageUpload.addEventListener("change", handleImageUpload);
-    dogCatBtn.addEventListener("click", () => switchModel(dogCatURL, dogCatBtn, "분석하고 싶은 이미지를 업로드하세요."));
-    faceBtn.addEventListener("click", () => switchModel(faceURL, faceBtn, "얼굴 사진을 업로드하여 분석해보세요."));
 }
 
 async function loadModel(url) {
@@ -24,22 +19,6 @@ async function loadModel(url) {
     const metadataURL = url + "metadata.json";
     currentModel = await tmImage.load(modelURL, metadataURL);
     maxPredictions = currentModel.getTotalClasses();
-}
-
-async function switchModel(url, button, descText) {
-    if (currentURL === url) return; // 이미 선택된 모델이면 변경 안함
-
-    currentURL = url;
-    imagePreview.innerHTML = "";
-    labelContainer.innerHTML = "";
-    document.querySelector(".classifier-selector .active").classList.remove("active");
-    button.classList.add("active");
-    description.textContent = descText;
-
-    // 로딩 표시 (선택사항)
-    labelContainer.innerHTML = "모델을 불러오는 중...";
-    await loadModel(url);
-    labelContainer.innerHTML = ""; // 로딩 완료 후 텍스트 제거
 }
 
 async function handleImageUpload(event) {
@@ -61,14 +40,31 @@ async function handleImageUpload(event) {
 
 async function predict(image) {
     const prediction = await currentModel.predict(image);
-    labelContainer.innerHTML = ""; // 이전 결과 초기화
+    prediction.sort((a, b) => b.probability - a.probability);
+
+    labelContainer.innerHTML = "";
+    ageEvaluation.innerHTML = "";
+
+    const resultTitle = document.createElement("h3");
+    resultTitle.innerHTML = `얼굴 나이 예측 결과: ${prediction[0].className}`;
+    labelContainer.appendChild(resultTitle);
+
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            `${prediction[i].className}: ${Math.round(prediction[i].probability * 100)}%`;
         const div = document.createElement("div");
         div.innerHTML = classPrediction;
         labelContainer.appendChild(div);
     }
+
+    const evaluation = document.createElement("div");
+    evaluation.innerHTML = `
+        <p style="margin-top: 20px; font-weight: bold;">얼굴나이 평가</p>
+        <p>와, 정말 동안이시네요!</p>
+        <p>피부 관리를 정말 잘하시는 것 같아요.</p>
+        <p>생기 넘치는 모습이 보기 좋습니다!</p>
+    `;
+    ageEvaluation.appendChild(evaluation);
 }
 
 init();

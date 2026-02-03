@@ -8,20 +8,17 @@
 </head>
 <body>
     <header>
-        <h1>AI 이미지 분석기</h1>
+        <h1>얼굴 나이 예측</h1>
     </header>
     <main class="container">
-        <div class="classifier-selector">
-            <button id="dog-cat-btn" class="active">강아지 vs 고양이</button>
-            <button id="face-btn">얼굴상 분석</button>
-        </div>
-        <p class="description">분석하고 싶은 이미지를 업로드하세요.</p>
+        <p class="description">당신의 얼굴 나이는 몇 살일까요?</p>
         <div class="upload-section">
             <label for="imageUpload" class="upload-label">이미지 선택</label>
             <input type="file" id="imageUpload" accept="image/*">
         </div>
         <div id="image-preview"></div>
         <div id="label-container"></div>
+        <div id="age-evaluation"></div>
     </main>
     <footer>
         <p>&copy; 2024 AI 이미지 분석기. All Rights Reserved.</p>
