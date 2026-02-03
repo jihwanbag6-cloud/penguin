@@ -1,65 +1,51 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f4f4f4;
-    color: #333;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    min-height: 100vh;
+    text-align: center;
 }
 
 .container {
-    background: #fff;
-    padding: 40px;
+    background-color: white;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
     max-width: 500px;
-    width: 100%;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
+    margin-top: 0;
 }
 
-form {
+#imageUpload {
+    margin-top: 20px;
+}
+
+#image-preview {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
+#image-preview img {
+    max-width: 100%;
+    max-height: 400px;
 }
 
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #2193b0;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-button {
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #2193b0;
-    color: #fff;
+#label-container {
+    margin-top: 20px;
     font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #1a758c;
+    font-weight: bold;
 }

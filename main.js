@@ -1,27 +1,47 @@
-const generateBtn = document.getElementById('generate-btn');
-const toggleModeBtn = document.getElementById('toggle-mode-btn');
-const lottoNumbersDiv = document.querySelector('.lotto-numbers');
-const numberDivs = document.querySelectorAll('.number');
+const URL = "https://teachablemachine.withgoogle.com/models/H3k6IZmjL/";
 
-function generateNumbers() {
-    const numbers = new Set();
-    while (numbers.size < 6) {
-        const randomNum = Math.floor(Math.random() * 45) + 1;
-        numbers.add(randomNum);
+let model, labelContainer, maxPredictions;
+
+const imageUpload = document.getElementById("imageUpload");
+const imagePreview = document.getElementById("image-preview");
+
+async function init() {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+
+    labelContainer = document.getElementById("label-container");
+    for (let i = 0; i < maxPredictions; i++) {
+        labelContainer.appendChild(document.createElement("div"));
     }
-    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
-    numberDivs.forEach((div, index) => {
-        div.textContent = sortedNumbers[index];
+
+    imageUpload.addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = async () => {
+                    imagePreview.innerHTML = ''; // Clear previous image
+                    imagePreview.appendChild(img);
+                    await predict(img);
+                };
+            };
+            reader.readAsDataURL(file);
+        }
     });
 }
 
-function toggleMode() {
-    document.body.classList.toggle('dark-mode');
-    document.body.classList.toggle('light-mode');
+async function predict(image) {
+    const prediction = await model.predict(image);
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        labelContainer.childNodes[i].innerHTML = classPrediction;
+    }
 }
 
-generateBtn.addEventListener('click', generateNumbers);
-toggleModeBtn.addEventListener('click', toggleMode);
-
-// Set initial mode
-document.body.classList.add('light-mode');
+init();
