@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이미빈 바보 멍청이</title>
+    <title>문의하기</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>이미빈 바보 멍청이</h1>
+    <div class="container">
+        <h1>문의하기</h1>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="197df3d8-b30b-42a5-904a-bf94d2210d05">
+            <input type="text" name="name" placeholder="이름" required>
+            <input type="email" name="email" placeholder="이메일" required>
+            <textarea name="message" placeholder="메시지" required></textarea>
+            <button type="submit">보내기</button>
+        </form>
+    </div>
 </body>
 </html>
