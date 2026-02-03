@@ -1,1 +1,95 @@
-/* Add styles here */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 40px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.lotto-numbers {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    transition: transform 0.2s;
+}
+
+.number:hover {
+    transform: scale(1.1);
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 1.2em;
+    background-color: #fff;
+    color: #2193b0;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #2193b0;
+    color: #fff;
+}
+
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+.dark-mode .container {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .number {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: #ccc;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.dark-mode button {
+    background-color: #333;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(255,255,255,0.1);
+}
+
+.dark-mode button:hover {
+    background-color: #fff;
+    color: #333;
+}
