@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강아지 vs 고양이 구분하기</title>
+    <title>AI 이미지 분석기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>강아지 vs 고양이 구분하기</h1>
-        <p>사진을 업로드하여 강아지인지 고양이인지 확인해보세요.</p>
-        <input type="file" id="imageUpload" accept="image/*">
+    <header>
+        <h1>AI 이미지 분석기</h1>
+    </header>
+    <main class="container">
+        <div class="classifier-selector">
+            <button id="dog-cat-btn" class="active">강아지 vs 고양이</button>
+            <button id="face-btn">얼굴상 분석</button>
+        </div>
+        <p class="description">분석하고 싶은 이미지를 업로드하세요.</p>
+        <div class="upload-section">
+            <label for="imageUpload" class="upload-label">이미지 선택</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
         <div id="image-preview"></div>
         <div id="label-container"></div>
-    </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 AI 이미지 분석기. All Rights Reserved.</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachable-machine-image.min.js"></script>
     <script src="main.js"></script>
